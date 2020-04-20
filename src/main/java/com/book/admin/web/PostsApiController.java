@@ -1,11 +1,14 @@
 package com.book.admin.web;
 
 import com.book.admin.service.posts.PostsService;
+import com.book.admin.web.dto.PostsListResponseDto;
 import com.book.admin.web.dto.PostsResponseDto;
 import com.book.admin.web.dto.PostsSaveRequestDto;
 import com.book.admin.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,5 +35,10 @@ public class PostsApiController {
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
+    }
+
+    @GetMapping("/api/v1/posts/list")
+    public List<PostsListResponseDto> findAll() {
+        return postsService.findAllDesc();
     }
 }
